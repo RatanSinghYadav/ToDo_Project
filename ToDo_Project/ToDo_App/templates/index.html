@@ -1,0 +1,91 @@
+{% extends 'navbar.html' %}
+
+{% block content%}
+<div class = "col-lg-3 mx-auto ">
+         <h1> Dashboard </h1>
+</div>
+
+ <div class = "container pt-4">
+     <div class = "row p-0 mt-4">
+         <div class = "col-lg-5 shadow mx-auto p-0">
+           <div class = "alert alert-success">
+             <h2> Add New ToDo </h2>
+           </div>
+
+
+             <div class="p-4">
+                <form method = "post" action="/add_todo/">
+                  {% csrf_token %}
+                  {{form.as_p}}
+                  <hr>
+                  <input type="submit"value="ADD"class="btn btn-info">
+             </div>
+
+           </div>
+
+
+                </form>
+         <div class="col">
+             <div class=" border shadow">
+
+                 {% if todos.count == 0 %}
+                 <div class = "p-4">
+                     <div class="mt-3">
+                         <div class = "alert alert-info text-center">
+                     <p class=""  style="font-size:40px ;"><b>No Todos</b>  </p>
+                 </div>
+                     </div>
+                 </div>
+
+                 {% else %}
+                  <div
+                  >
+                  <table class = "table">
+                      <thead>
+                      <tr>
+                          <th>Number</th>
+                          <th>Title</th>
+                          <th>Status</th>
+                          <th>Priority</th>
+
+                          <th>Action</th>
+
+                      </tr>
+                      </thead>
+                      <tbody>
+
+
+                              {% for todo in todos %}
+                          <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{todo.title}}</td>
+                          <td>{{todo.status}}</td>
+                          <td>{{todo.priority}}</td>
+                          <td><a href ="/delete-todo/{{todo.id}}"class="" title="Delete">🗑️</a></td>
+                              {% if todo.status == 'Completed'%}
+                          <td><a href ="/change-status/{{todo.id}}/Panding" class="" title="Completed">✅</a></td>
+                              {%else%}
+                          <td><a href ="/change-status/{{todo.id}}/Completed" title="Pending" class="">🕒</a></td>
+                              {% endif %}
+                          </tr>
+                              {% endfor %}
+
+
+                      </tbody>
+                  </table>
+              </div>
+             </div>
+
+                 {% endif %}
+
+         </div>
+     </div>
+
+
+
+
+ </div>
+
+{% endblock %}
+
+

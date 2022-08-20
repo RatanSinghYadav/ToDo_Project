@@ -1,0 +1,44 @@
+{% extends 'navbar.html' %}
+
+{% block content%}
+        <div class = " col-lg-3  p-4 mx-auto">
+
+           <h1> SignUp Page</h1>
+        </div>
+
+
+
+      <div class="col-lg-5 shadow mx-auto p-0">
+
+           <div class = "alert alert-success">
+             <h2> Create Account</h2>
+               </div>
+           <div class = "p-4">
+               <form method="POST" action="/signup/">
+                   {% csrf_token %}
+                   {{form.as_p}}
+             <hr>
+            <input class ="btn btn-success" type="submit" value="Create Account">
+           </form>
+         </div>
+      </div>
+
+               </form>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
